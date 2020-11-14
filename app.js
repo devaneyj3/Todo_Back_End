@@ -3,21 +3,18 @@ var express = require("express");
 let todosRouter = require("./api/TodoRoute");
 
 require("dotenv").config();
-var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 let cors = require("cors");
 let helmet = require("helmet");
 var app = express();
 
-app.use("/api/todos/", todosRouter);
 app.use(cors());
 app.use(helmet());
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
+app.use("/api/todos", todosRouter);
 app.get("/", function (req, res) {
     res.status(200).send("API is up");
 });
