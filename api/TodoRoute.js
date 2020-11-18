@@ -21,6 +21,7 @@ router.post("/", async (req, res) => {
     const data = await db("todos").insert({
         name: req.body.name,
         created_at: req.body.created_at,
+        completed: req.body.status,
     });
     req.body.id = data[0];
     if (data) {
@@ -34,6 +35,14 @@ router.delete("/:id", async (req, res) => {
     const data = await db("todos").where({ id }).del();
     if (data) {
         res.status(200).send(req.body);
+    }
+});
+
+router.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const data = await db("todos").where({ id }).update({ completed: "yes" });
+    if (data) {
+        res.status(200).send(data);
     }
 });
 

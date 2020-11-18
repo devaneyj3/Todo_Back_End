@@ -3,6 +3,7 @@ exports.up = function (knex) {
         tbl.increments();
         tbl.text("name").unique().notNullable();
         tbl.text("created_at");
+        tbl.text("completed");
     });
 };
 
