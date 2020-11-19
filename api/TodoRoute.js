@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
     const data = await db("todos");
+    console.log(data);
     try {
         if (data) {
             res.status(200).send(data);
@@ -22,6 +23,7 @@ router.post("/", async (req, res) => {
         completed: req.body.completed,
     });
     req.body.id = data[0];
+    console.log(req.body);
     if (data) {
         res.status(200).send(req.body);
     }
