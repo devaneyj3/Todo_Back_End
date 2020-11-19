@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
     await db("todos").insert(req.body);
 
     const todos = await db("todos");
-    if (data) {
+    if (todos) {
         res.status(200).send(todos);
     }
 });
