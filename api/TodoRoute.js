@@ -16,9 +16,11 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const data = await db("todos").insert(req.body);
+    await db("todos").insert(req.body);
+
+    const todos = await db("todos");
     if (data) {
-        res.status(200).json({ body: req.body, id: data });
+        res.status(200).send(todos);
     }
 });
 
