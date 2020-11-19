@@ -22,7 +22,6 @@ router.post("/", async (req, res) => {
         created_at: req.body.created_at,
         completed: req.body.completed,
     });
-    req.body.id = data[0];
     console.log(req.body);
     if (data) {
         res.status(200).send(req.body);
