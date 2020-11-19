@@ -3,14 +3,12 @@
 module.exports = {
     development: {
         client: "sqlite3",
-        debug: true,
         connection: {
             filename: "./dev.sqlite3",
         },
         migrations: {
             directory: "./data/migrations",
         },
-        ssl: true,
         useNullAsDefault: true,
         pool: {
             afterCreate: (conn, done) => {
@@ -20,29 +18,9 @@ module.exports = {
         },
     },
 
-    staging: {
-        client: "postgresql",
-        connection: {
-            // database: process.env.DB,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-        },
-        pool: {
-            min: 2,
-            max: 10,
-        },
-        migrations: {
-            directory: "./data/migrations",
-        },
-    },
-
     production: {
         client: "postgresql",
-        connection: {
-            // database: process.env.DB,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-        },
+        connection: process.env.DATABASE_URL,
         pool: {
             min: 2,
             max: 10,
