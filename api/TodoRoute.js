@@ -17,9 +17,8 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     const data = await db("todos").insert(req.body);
-    console.log(req.body);
     if (data) {
-        res.status(200).send(req.body, data);
+        res.status(200).json({ body: req.body, id: data });
     }
 });
 
