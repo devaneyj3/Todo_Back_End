@@ -1,4 +1,5 @@
 const db = require("../data/db_config");
+const moment = require("moment");
 const express = require("express");
 const router = express.Router();
 
@@ -32,11 +33,12 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-router.put("/:id/toggleComplete/:complete", async (req, res) => {
-    const { id, complete } = req.params;
+router.put("/:id/toggleComplete/", async (req, res) => {
+    const { id } = req.params;
+    const { completed_at, complete } = req.body;
     const data = await db("todos")
         .where({ id })
-        .update({ completed: complete });
+        .update({ completed: complete, completed_at: completed_at });
     const updated_todo = await db("todos").where({ id });
     if (data) {
         res.status(200).send(updated_todo);
